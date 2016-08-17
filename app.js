@@ -39,6 +39,7 @@ app.route('/movies/:movie_id')
   .get(function(req, res, next) {
     var movie_id = req.params.movie_id;
     // res.send('movie_id is ' + movie_id );
+//comment comment
     Movie.findOne({
       _id: movie_id
     }, function(err, movie) {

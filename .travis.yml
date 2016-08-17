@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- node
+deploy:
+  provider: heroku
+  api_key:
+    secure: nbvlm10U229Cd5ovrIgMSVAw+NgJcg/5/1DeTkas9DyP79r/Qvju4LFA3ob8kfx5q+f176anweRp4Gg6mBVHTB1YpRwVlLkexK9GfX9OqURowDcZXmzG7AicQLc1Q2bParqWC/3FUVkIJJcX7sPOGOpwWTjnA32DiRm0cYTgtHP0EBp1TVBLQb4DTZ1iLhbVQunwofM79cGtjnTm7f3V2fRxGGsmkznpwqG2Jcv5giu8l88Vp1PotN2p67oTLwsXHmAH3MLbUIO/9+v1+t8vQNok7K/M3EZuEFCCZ8+sUyC8CBBTpAbTkbnk4J2/dGSzjNUfwTatvg9sfXloaC5XAOlMtGL3QQMRLJKr+BVsOeDFudfaiJ8KoSIL/Oz3+YZ7JpmvLhmNExvFa+O0wGEu5uK7V2Nq4Q+lSt+qZ7W1I2AW6hV5IZHluVLkJYgl4ejqmYOmVr6DqvdtetjIK9AdK7sKhy+iyyAoYnETyUI2xZMvg2SC+mAysL2RMskFjyjl/vnpe5abjTNRYzS8MPU71g4tSD598eTUS2h46X3gZLNSkyYtA1/dq2mRINFygS3RcIDvHYkg8TComt5yR09TtHq1cK/y+Ct1IQc+0KbegFQ/MgZnc0WiHQLzyqUoOljR31J5tANyw9UNhXkNkkHsNPFsjwkSXq2zSwa3RP8CXE0=
+  app: mymdb
+  on:
+    repo: Minghanlin/mymdb
