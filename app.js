@@ -1,5 +1,6 @@
 
-var mongo_url = 'mongodb://localhost/mymdb_db';
+var mongo_url = process.env.MONGODB_URI ||
+ 'mongodb://localhost/mymdb_db';
 
 //require mongoose
 var mongoose = require('mongoose');
