@@ -8,3 +8,6 @@ deploy:
   app: agile-sands-82622
   on:
     repo: Minghanlin/mymdb
+
+
+ # heroku config:set PROD_MONGODB=mongodb:blah blah blah

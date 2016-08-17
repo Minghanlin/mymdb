@@ -1,6 +1,5 @@
-
 var mongo_url = process.env.MONGODB_URI ||
- 'mongodb://localhost/mymdb_db';
+  'mongodb://localhost/mymdb_db';
 
 //require mongoose
 var mongoose = require('mongoose');
@@ -41,24 +40,24 @@ app.route('/movies/:movie_id')
   .get(function(req, res, next) {
     var movie_id = req.params.movie_id;
     // res.send('movie_id is ' + movie_id );
-//comment comment
+    //comment comment
     Movie.findOne({
       _id: movie_id
     }, function(err, movie) {
-      if(err) return next(err);
+      if (err) return next(err);
 
       res.json(movie);
     });
   })
-    .put(function(req, res, next) {
+  .put(function(req, res, next) {
     // console.log(req.body);
     var movie_id = req.params.movie_id;
     Movie.findByIdAndUpdate(movie_id, req.body,
-    function(err, movie) {
-      if(err) return next(err);
+      function(err, movie) {
+        if (err) return next(err);
 
-      res.json(movie);
-    });
+        res.json(movie);
+      });
   });
 
 //list all movies
@@ -75,32 +74,48 @@ app.route('/movies')
     console.log(req.body);
     var new_movie = new Movie(req.body);
     new_movie.save(function(err) {
-      if (err) return next(err);
+      if (err) return res.send(400, err);
       res.json(new_movie);
     });
   });
 
-app.route('/actors/:actor_id')
-  .get(function(req, res, next) {
-    var actor_id = req.params.actor_id;
-    // res.send('actor_id is ' + actor_id );
-    Actor.findOne({
-      _id: actor_id
-    }, function(err, actor) {
-      if(err) return next(err);
+//set routes for actors
 
-      res.json(actor);
-    });
+
+app.route('/actors/:actor_name')
+  .get(function(req, res, next) {
+    var actor_name = req.params.actor_name;
+    // res.send('actor_id is ' + actor_id );
+    Actor.find()
+        .byName(actor_name)
+        .exec(function(err, actor) {
+          res.json(actor);
+        });
+
+    // Actor.findOne({
+    //   _id: actor_name
+    // }, function(err, actor) {
+    //   if(err) return next(err);
+    //
+    //     res.json(actor);
+    // });
   })
-    .put(function(req, res, next) {
+  .put(function(req, res, next) {
     // console.log(req.body);
     var actor_id = req.params.actor_id;
     Actor.findByIdAndUpdate(actor_id, req.body,
-    function(err, actor) {
-      if(err) return next(err);
+      function(err, actor) {
+        if (err) return next(err);
 
-      res.json(actor);
-    });
+        Actor.findOne({
+            _id: actor_id
+          },
+          function(err, actor) {
+            if (err) return next(err);
+            res.json(actor);
+          });
+
+      });
   });
 
 //list all actors
@@ -115,8 +130,20 @@ app.route('/actors')
   .post(function(req, res) {
     console.log(req.body);
     var new_actor = new Actor(req.body);
+
     new_actor.save(function(err) {
-      if (err) return next(err);
+      if (err) {
+        console.log(
+          'error message is: ' +
+          err.errors.email.message
+        );
+        var error_message =
+        {
+          "message": err.errors.email.message,
+          "status_code": 400
+        };
+        return res.status(400).send(err);
+      }
       res.json(new_actor);
     });
   });
@@ -127,4 +154,4 @@ app.listen(app.get('port'), function() {
   console.log('running on port: ' + app.get('port'));
 });
 
-module.exports =  app;
+module.exports = app;

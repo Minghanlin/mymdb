@@ -41,6 +41,7 @@ var movieSchema = new mongoose.Schema({
 
 //register the getter
 movieSchema.set('toJSON', { getters: true });
+movieSchema.set('timestamps', {}); //default timestamps to every document created
 
 //register the Schema
 var Movie = mongoose.model('Movie', movieSchema);
