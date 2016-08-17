@@ -8,3 +8,6 @@ deploy:
   app: mymdb
   on:
     repo: Minghanlin/mymdb
+
+env:
+- MONGODB_URI=mongodb://heroku_j0608bc0:5neqg8tbopishfr5shq5pbt8eq@ds161255.mlab.com:61255/heroku_j0608bc0
