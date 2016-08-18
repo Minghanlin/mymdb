@@ -39,6 +39,15 @@ var movieSchema = new mongoose.Schema({
   },
 });
 
+//before saving, console.log('saving movie');
+movieSchema.pre('save', function(next) {
+  console.log('saving movie');
+  return next();
+});
+//after saving, console.log('movie saved');
+movieSchema.post('save', function(next) {
+  console.log('movie saved');
+});
 //register the getter
 movieSchema.set('toJSON', { getters: true });
 movieSchema.set('timestamps', {}); //default timestamps to every document created
